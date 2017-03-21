@@ -16,10 +16,12 @@
       cf_mysql:
         external_host: "cf-mysql.((system_domain))"
         mysql:
+          persistent_disk: 100000
           admin_password: "((cf_mysql_mysql_admin_password))"
         broker:
-          auth_password: "((cf_mysql_broker_password))"
+          auth_password: "((cf_mysql_broker_auth_password))"
           cookie_secret: "((cf_mysql_broker_cookie_secret))"
+          db_password: "((cf_mysql_broker_db_password))"
           quota_enforcer:
             password: "((cf_mysql_quota_enforcer_password))"
           ssl_enabled: false
@@ -67,7 +69,12 @@
 - type: replace
   path: /variables/-
   value:
-    name: cf_mysql_broker_password
+    name: cf_mysql_broker_auth_password
+    type: password
+- type: replace
+  path: /variables/-
+  value:
+    name: cf_mysql_broker_db_password
     type: password
 - type: replace
   path: /variables/-
