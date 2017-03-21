@@ -50,7 +50,7 @@
 - type: replace
   path: /instance_groups/name=mysql/jobs/-
   value: 
-    name: mysql-broker
+    name: broker-registrar
     release: cf-mysql
     properties:
       cf:
