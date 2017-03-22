@@ -10,7 +10,7 @@
     networks:
     - name: private
     jobs:
-      name: cf-mysql-broker
+    - name: cf-mysql-broker
       release: cf-mysql
       properties:
         nats: 
@@ -69,7 +69,7 @@
     networks:
     - name: private
     jobs:
-      name: broker-registrar
+    - name: broker-registrar
       release: cf-mysql
       properties:
         cf:
