@@ -82,7 +82,7 @@
           broker:
             protocol: http
             port: 80
-            auth_password: "((cf_mysql_broker_password))"
+            auth_password: "((cf_mysql_broker_auth_password))"
             services: *services
 
 - type: replace
