@@ -80,6 +80,7 @@
         cf_mysql:
           external_host: "cf-mysql.((system_domain))"
           broker:
+            protocol: http
             auth_password: "((cf_mysql_broker_password))"
             services: *services
 
