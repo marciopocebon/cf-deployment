@@ -1,7 +1,15 @@
 ---
 - type: replace
-  path: /instance_groups/name=mysql/jobs/-
-  value: 
+  path: /instance_groups/-
+  value:
+    name: cf-mysql-broker
+    azs: [z1]
+    instances: 1
+    vm_type: m3.large
+    stemcell: default
+    networks:
+    - name: private
+    jobs:
     name: cf-mysql-broker
     release: cf-mysql
     properties:
@@ -50,8 +58,17 @@
               max_user_connections: 20
 
 - type: replace
-  path: /instance_groups/name=mysql/jobs/-
-  value: 
+  path: /instance_groups/-
+  value:
+    name: cf-mysql-broker-registrar
+    lifecycle: errand
+    azs: [z1]
+    instances: 1
+    vm_type: m3.large
+    stemcell: default
+    networks:
+    - name: private
+    jobs:
     name: broker-registrar
     release: cf-mysql
     properties:
