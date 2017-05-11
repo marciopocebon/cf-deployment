@@ -13,11 +13,6 @@
     - name: cf-mysql-broker
       release: cf-mysql
       properties:
-        nats: 
-          machines: [10.244.0.35]
-          password: "((nats_password))"
-          port: 4222
-          user: nats
         cf:
           api_url: "https://api.((system_domain))"
           skip_ssl_validation: true
