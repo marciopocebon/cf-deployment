@@ -8,7 +8,7 @@
     vm_type: m3.large
     stemcell: default
     networks:
-    - name: private
+    - name: default
     jobs:
     - name: cf-mysql-broker
       release: cf-mysql
@@ -62,7 +62,7 @@
     vm_type: m3.large
     stemcell: default
     networks:
-    - name: private
+    - name: default
     jobs:
     - name: broker-registrar
       release: cf-mysql
