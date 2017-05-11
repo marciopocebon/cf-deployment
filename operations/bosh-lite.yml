@@ -3,18 +3,8 @@
 - type: replace
   path: /instance_groups/name=router/networks
   value:
-  - name: private
+  - name: default
     static_ips: [10.244.0.34]
-
-# --- Set NATS Static IP ---
-- type: replace
-  path: /instance_groups/name=nats/networks
-  value:
-  - name: private
-    static_ips: [10.244.0.35]
-- type: replace
-  path: /instance_groups/name=mysql/jobs/name=proxy/properties/nats/machines
-  value: [10.244.0.35]
 
 # --- Add Bosh Lite Security Groups ---
 - type: replace
@@ -119,13 +109,6 @@
   path: /instance_groups/name=router/instances
   value: 1
 - type: replace
-  path: /instance_groups/name=route-emitter/azs
-  value:
-  - z1
-- type: replace
-  path: /instance_groups/name=route-emitter/instances
-  value: 1
-- type: replace
   path: /instance_groups/name=api/instances
   value: 1
 - type: replace
@@ -140,3 +123,8 @@
 - type: replace
   path: /instance_groups/name=log-api/instances
   value: 1
+
+# ----- Reduce default app memory to 256M ------
+- type: replace
+  path: /instance_groups/name=api/jobs/name=cloud_controller_ng/properties/cc/default_app_memory?
+  value: 256
