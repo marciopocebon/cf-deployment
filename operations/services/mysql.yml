@@ -59,7 +59,7 @@
         route_registrar:
           routes:
           - name: cf-mysql
-            port: 80
+            port: 8081
             registration_interval: 20s
             uris:
             - "cf-mysql.((system_domain))"
