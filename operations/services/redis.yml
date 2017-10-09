@@ -1,0 +1,55 @@
+---
+- type: replace
+  path: /instance_groups/-
+  value:
+    name: redis_leader
+    azs: [z1]
+    persistent_disk_type: 10GB
+    instances: 1
+    vm_type: m3.large
+    vm_extensions:
+    - 10GB_ephemeral_disk
+    stemcell: default
+    networks:
+    - name: private
+    persistent_disk_type: large
+    jobs:
+    - name: dedicated-node
+      release: redis
+    - name: cf-redis-broker
+      release: redis
+      properties:
+        cf:
+          apps_domain: "((system_domain))"
+          system_domain: "((system_domain))"
+        redis:
+          config_command:
+          save_command:
+          bg_save_command:
+          broker:
+            auth:
+              password: "((redis_broker_password))"
+              username: admin
+    - name: broker-registrar
+      release: redis
+      properties:
+        broker:
+          host: redis-broker.((system_domain))
+          name: redis
+          username: admin
+          password: "((redis_broker_password))"
+        cf:
+          api_url: "https://api.((system_domain))"
+          skip_ssl_validation: true
+          admin_username: admin
+          admin_password: "((uaa_scim_users_admin_password))"
+        redis:
+          broker:
+            service_name: redis
+
+
+- type: replace
+  path: /variables/-
+  value:
+    name: redis_password
+    type: password
